@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "routereel"
+version = "0.1.0"
+description = "A zero-dependency Python CLI that optimizes delivery routes from a CSV of stops."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+keywords = ["cli", "logistics", "routing", "tsp", "dispatch", "delivery"]
+
+[project.scripts]
+routereel = "routereel.cli:main"
+
+[tool.setuptools]
+packages = ["routereel"]
