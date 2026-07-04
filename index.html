@@ -1,1 +1,166 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RouteReel — Dispatch Routing Tool by Karolis Braciulis</title>
+<meta name="description" content="RouteReel is a route-planning and dispatch utility built by Karolis Braciulis, a logistics and operations professional in Chicagoland. Plan, sequence, and optimize delivery stops from the command line.">
+<meta name="author" content="Karolis Braciulis">
+<link rel="canonical" href="https://karolisb123.github.io/routereel/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="RouteReel — Dispatch Routing Tool">
+<meta property="og:description" content="A route-planning utility for dispatchers, built by Karolis Braciulis.">
+<meta property="og:url" content="https://karolisb123.github.io/routereel/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "RouteReel",
+  "author": {
+    "@type": "Person",
+    "name": "Karolis Braciulis",
+    "url": "https://karolisb123.github.io/"
+  },
+  "programmingLanguage": "Python",
+  "codeRepository": "https://github.com/karolisb123/routereel",
+  "url": "https://karolisb123.github.io/routereel/"
+}
+</script>
+
+<style>
+:root{
+  --navy:#0f2436;--navy-deep:#0a1926;--paper:#f6f4ef;--ink:#16202b;
+  --amber:#e0902f;--amber-soft:#f2c078;--line:#d8d2c6;--muted:#5c6773;
+  --mono:'SFMono-Regular',ui-monospace,'Cascadia Mono','Roboto Mono',Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+.topnav{background:var(--navy-deep);padding:11px 0}
+.topnav .wrap{display:flex;justify-content:space-between;align-items:center}
+.topnav a{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--amber-soft);text-decoration:none}
+.topnav a:hover{color:#fff}
+.topnav .name{color:var(--paper);font-weight:600}
+
+.hero{background:linear-gradient(180deg,var(--navy),var(--navy-deep));color:var(--paper);padding:64px 0 54px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent 0 60px,rgba(224,144,47,.05) 60px 61px);pointer-events:none}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px}
+h1{font-size:clamp(40px,8vw,72px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.tagline{margin-top:16px;font-size:clamp(17px,2.4vw,20px);color:var(--amber-soft);max-width:560px}
+.cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.cta a{font-family:var(--mono);font-size:13.5px;text-decoration:none;padding:11px 20px;border-radius:3px}
+.cta .primary{background:var(--amber);color:var(--navy-deep);font-weight:700}
+.cta .primary:hover{background:var(--amber-soft)}
+.cta .ghost{border:1px solid rgba(242,192,120,.4);color:var(--amber-soft)}
+.cta .ghost:hover{border-color:var(--amber-soft)}
+
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.sec-label{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.sec-label::before{content:"";width:26px;height:1px;background:var(--amber)}
+h2{font-size:clamp(23px,4vw,30px);letter-spacing:-.01em;margin-bottom:16px}
+p.lead{font-size:17px;max-width:660px;color:var(--ink)}
+
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:8px}
+.feature{border:1px solid var(--line);background:#fff;border-radius:4px;padding:22px}
+.feature .n{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.1em}
+.feature h3{font-size:17px;margin:8px 0 6px}
+.feature p{font-size:14.5px;color:var(--muted)}
+
+pre{background:var(--navy-deep);color:#e8e2d4;font-family:var(--mono);font-size:13.5px;padding:20px 22px;border-radius:5px;overflow-x:auto;margin-top:8px;line-height:1.7}
+pre .c{color:var(--amber-soft)}
+pre .p{color:#7fa8c9}
+
+.editnote{font-family:var(--mono);font-size:11.5px;color:#b06b1a;background:#fbf3e4;border:1px dashed var(--amber);padding:10px 12px;border-radius:3px;margin-top:18px}
+
+footer{padding:38px 0 56px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+footer a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--amber)}
+.mono{font-family:var(--mono);letter-spacing:.05em}
+
+@media(max-width:600px){section{padding:40px 0}.hero{padding:50px 0 42px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="name" href="https://karolisb123.github.io/">&larr; Karolis Braciulis</a>
+    <a href="https://github.com/karolisb123/routereel">View on GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Dispatch &middot; Routing &middot; Python</div>
+    <h1>RouteReel</h1>
+    <p class="tagline">A zero-dependency Python CLI that turns a CSV of delivery stops into an efficient driving route — the order to visit them, mileage between each, and the total for the run.</p>
+    <div class="cta">
+      <a class="primary" href="https://github.com/karolisb123/routereel">Source on GitHub</a>
+      <a class="ghost" href="https://karolisb123.github.io/">Back to portfolio</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Overview</div>
+    <h2>What it does</h2>
+    <p class="lead">RouteReel solves the everyday dispatch problem: you have a truck, a depot, and a dozen drops — what's the shortest sensible way to hit them all and get back? Point it at a CSV of stops, name your depot, and it returns the visiting order, the mileage between each stop, and the total distance for the run. Zero external libraries, and it runs instantly.</p>
+    <p class="lead" style="margin-top:14px">Under the hood it's a small <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem" style="color:var(--navy);border-bottom:1px solid var(--amber);text-decoration:none">Traveling Salesman</a> solver: real great-circle distances via the haversine formula, a nearest-neighbor heuristic to build the first route, then a 2-opt pass that un-crosses the path to shorten it — close to optimal for the stop counts one driver handles in a day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Capabilities</div>
+    <h2>Highlights</h2>
+    <div class="features">
+      <div class="feature"><div class="n">01</div><h3>Real-world distance</h3><p>Haversine great-circle mileage from latitude/longitude — not a flat grid approximation.</p></div>
+      <div class="feature"><div class="n">02</div><h3>2-opt optimization</h3><p>Nearest-neighbor builds a first route; a 2-opt pass un-crosses it to cut total distance.</p></div>
+      <div class="feature"><div class="n">03</div><h3>Zero dependencies</h3><p>Pure Python standard library. Clone and run — nothing to install, nothing to break.</p></div>
+      <div class="feature"><div class="n">04</div><h3>Depot &amp; one-way modes</h3><p>Start from a named depot and return to it, or run one-way with <code>--one-way</code>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-label">Usage</div>
+    <h2>Getting started</h2>
+    <pre><span class="c"># clone and run</span>
+git clone https://github.com/karolisb123/routereel.git
+cd routereel
+python3 -m routereel.cli plan <span class="p">sample_data/stops.csv</span>
+
+<span class="c"># or install it as a command</span>
+pip install -e .
+routereel plan stops.csv <span class="p">-d</span> <span class="p">"Bolingbrook Depot"</span>
+
+<span class="c"># one-way run that doesn't return to the depot</span>
+routereel plan stops.csv <span class="p">-d</span> <span class="p">"Bolingbrook Depot"</span> <span class="p">--one-way</span></pre>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Built by <a href="https://karolisb123.github.io/">Karolis Braciulis</a> &middot; &copy; <span id="yr"></span></span>
+    <span class="mono">CHICAGOLAND &middot; IL</span>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
